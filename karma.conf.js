@@ -23,7 +23,10 @@ module.exports = (config) => {
         customLaunchers: {
             ChromeHeadless_with_debug : {
                 base: 'Chrome',
-                flags: ['--remote-debugging-port=9334']
+                flags: [
+                    '--remote-debugging-port=9334',
+                    '--no-sandbox'
+               ]
             }
         }
     });
