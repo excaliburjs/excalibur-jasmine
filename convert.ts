@@ -21,7 +21,7 @@ const convertCanvas = (canvas: HTMLCanvasElement) => {
 
 const convertFilePath = (imagePath: string, baseImagePath: string = '/base/') => {
 
-    const path = baseImagePath + imagePath;
+    const path = baseImagePath + imagePath + '?_=' + Math.random();
 
     const image = new Image();
     image.src = path;
