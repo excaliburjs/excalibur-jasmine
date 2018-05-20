@@ -1,4 +1,3 @@
-import { baseImagePath } from "./matchers";
 
 const convertVisualToImageData = (visual): Promise<ImageData> => {
     
@@ -20,7 +19,7 @@ const convertCanvas = (canvas: HTMLCanvasElement) => {
 }
 
 
-const convertFilePath = (imagePath: string) => {
+const convertFilePath = (imagePath: string, baseImagePath: string = '/base/') => {
 
     const path = baseImagePath + imagePath;
 

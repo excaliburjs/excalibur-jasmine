@@ -47,8 +47,6 @@ const ensureImagesLoaded = (...images: ExcaliburVisual[]): Promise<ImageData[]> 
     return Promise.all(images.map(convertVisualToImageData));
 }
 
-const baseImagePath = '/base/';
-
 const ExcaliburMatchers: jasmine.CustomMatcherFactories = {
 
     toEqualImage: (util, customEqualityTester) => {
@@ -61,4 +59,4 @@ const ExcaliburMatchers: jasmine.CustomMatcherFactories = {
     }
 }
 
-export { ExcaliburMatchers, ensureImagesLoaded, baseImagePath };
+export { ExcaliburMatchers, ensureImagesLoaded };

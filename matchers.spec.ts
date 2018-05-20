@@ -61,5 +61,22 @@ describe('Custom matcher: toEqualImage', () => {
             done();
         });
     });
+
+    it('can load images from file', (done) => {
+        let image1 = document.createElement('img');
+        image1.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC8AAAAwCAYAAACBpyPiAAAACXBIWXMAAAhNAAAITQEhiCGBAAAByUlEQVRo3mP8//8/w1AFTAxDGIw6ftTxZACWweagkJAQvCXImjVrGAeV41etWlUPYysrK2NV8+zZs8EZ8qtWrWqAsd3c3LCqef/+/Wiap1tSERQUHLSOJ5hUCDl+NNnQKqm8evUKWaoBXS0jPRtmyGU4rqSipKQEZ1+5cgXOLigoYBxNNgOZVOiabKidVEaTzUAlFZonG1omldFkM1BJhSbJhl5JZWQlm0Nru+BJwi64rHEgkwrJyaYlWhSuqGbpa8aBTCrDP9kgJxUVGT7kWKjn5WJmMPQoGpCkQlSyQU4qHhYycPEdJ57A2WL2rXRPKiO3kkJOQp8GIKlQzfHncDgeLak00srxwzbZwKP7zpNPDdhCXvLPaTj7yXlEPPx69aqBTdqO5o4nuZJCLnmQAXIphFyR0RIMz2QzzV8UXkmxfvvDgJSE4GxtNTkkNhNKRcYmZcvAwMDAUNa9rpHuyaZPnw+rxDcddjg7zNcWe9t+82G6JKHhk2yOT2+vx6aIlZUVayl09ebDBkIlFd1KG1xJhZubG85OP/acEVsphAxGSxtKShtcSWUgkgfJyQZXUhlMYPgkG8uMSngyYGVjHfSOZxxd9TFAAACV193rbpOWXQAAAABJRU5ErkJggg==';
+        
+        ensureImagesLoaded('./test-images/working.png', image1).then(([imageData1, imageData2]) => {
+            expect(imageData1).toEqualImage(imageData2, 1);
+            done();
+        });
+    });
+
+    it('can negate images from a file', (done) => {
+        ensureImagesLoaded('./test-images/working.png', './test-images/busted.png').then(([imageData1, imageData2])=> {
+            expect(imageData1).not.toEqualImage(imageData2, 1);
+            done();
+        });
+    });
     
 });

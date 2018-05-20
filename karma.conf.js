@@ -5,7 +5,8 @@ module.exports = (config) => {
         singleRun: true,
         frameworks: ['jasmine', 'karma-typescript'],
         files: [
-            '*.ts'
+            '*.ts',
+            '**/*.png'
         ],
         preprocessors: {
             "*.ts": "karma-typescript"
