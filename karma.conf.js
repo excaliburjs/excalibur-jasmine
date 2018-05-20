@@ -23,8 +23,15 @@ module.exports = (config) => {
         reporters: ['progress'],
         browsers: ['ChromeHeadless_with_debug'],
         customLaunchers: {
-            ChromeHeadless_with_debug : {
+            ChromeHeadless_with_debug: {
                 base: 'ChromeHeadless',
+                flags: [
+                    '--remote-debugging-port=9334',
+                    '--no-sandbox'
+               ]
+            },
+            Chrome_with_debug: {
+                base: 'Chrome',
                 flags: [
                     '--remote-debugging-port=9334',
                     '--no-sandbox'

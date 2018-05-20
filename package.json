@@ -4,7 +4,8 @@
   "description": "Jasmine matchers for testing excalibur",
   "main": "index.js",
   "scripts": {
-    "test": "node ./node_modules/karma/bin/karma start"
+    "test": "node ./node_modules/karma/bin/karma start",
+    "test-watch": "node ./node_modules/karma/bin/karma start --single-run=false --browsers=Chrome_with_debug"
   },
   "keywords": [
     "Excalibur",
