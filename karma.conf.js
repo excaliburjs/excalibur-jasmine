@@ -2,6 +2,7 @@ process.env.CHROME_BIN = require('puppeteer').executablePath()
 
 module.exports = (config) => {
     config.set({
+        singleRun: true,
         frameworks: ['jasmine', 'karma-typescript'],
         files: [
             '*.ts'
