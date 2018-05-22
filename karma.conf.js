@@ -5,15 +5,15 @@ module.exports = (config) => {
         singleRun: true,
         frameworks: ['jasmine'],
         files: [
-            '*.spec.ts',
+            'specs/index.ts',
             { pattern: 'test-images/*.png', included: false, served: true }
         ],
         mime: { 'text/x-typescript': ['ts','tsx'] },
         preprocessors: {
-            "*.spec.ts": ["webpack"]
+            "specs/index.ts": ["webpack", 'sourcemap']
         },
         webpack: {
-            mode: 'none',
+            devtool: 'inline-source-map',
             resolve: {
                 extensions: ['.ts', '.js']
             },

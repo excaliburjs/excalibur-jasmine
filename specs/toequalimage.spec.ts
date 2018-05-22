@@ -1,4 +1,4 @@
-import { ExcaliburMatchers, ensureImagesLoaded } from "./index";
+import { ExcaliburMatchers, ensureImagesLoaded } from "../index";
 
 describe('Custom matcher: toEqualImage', () => {
     beforeAll(() => {
