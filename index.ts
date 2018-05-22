@@ -1,3 +1,5 @@
+/// <reference path="matcher-types.d.ts" />
+
 import { convertVisualToImageData } from "./convert";
 import * as ex from "excalibur";
 

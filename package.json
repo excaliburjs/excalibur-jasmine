@@ -2,9 +2,10 @@
   "name": "excalibur-jasmine",
   "version": "1.0.0",
   "description": "Jasmine matchers for testing excalibur",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "webpack --mode none",
     "test": "node ./node_modules/karma/bin/karma start",
     "test:watch": "node ./node_modules/karma/bin/karma start --single-run=false --browsers=Chrome_with_debug"
   },
@@ -18,6 +19,8 @@
   "license": "BSD-2-Clause",
   "devDependencies": {
     "@types/jasmine": "2.8.7",
+    "copy-webpack-plugin": "4.5.1",
+    "declaration-bundler-webpack-plugin": "1.0.3",
     "excalibur": "0.16.0",
     "jasmine-core": "3.1.0",
     "karma": "2.0.2",

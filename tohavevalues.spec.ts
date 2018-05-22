@@ -1,4 +1,4 @@
-import { ExcaliburMatchers } from "./matchers";
+import { ExcaliburMatchers } from "./index";
 import * as ex from 'excalibur';
 
 describe('Custom matcher: toHaveValues', () => {

@@ -9,8 +9,17 @@ declare namespace jasmine {
          */
         toEqualImage(expected: ImageData, tolerance?: number, expectationFailOutput?: any): boolean;
 
+        /**
+         * Compares an Excalibur vector to another.
+         * @param expected Vector that is expect
+         * @param delta Distance that the 2 vectors can diverge, defaults to .01
+         */
         toBeVector(expected: ex.Vector, delta?: number): boolean;
 
+        /**
+         * Compares an Excalibur actor to a set of possible properties on actor
+         * @param expected The expected properties on an actor
+         */
         toHaveValues(expected: ex.IActorArgs): boolean;
     }
 }
