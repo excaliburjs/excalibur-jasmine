@@ -10,6 +10,7 @@
         ],
         "types": [
             "@types/jasmine"
-        ]
+        ],
+        "moduleResolution": "node"
     }
 }

@@ -3,20 +3,23 @@ process.env.CHROME_BIN = require('puppeteer').executablePath()
 module.exports = (config) => {
     config.set({
         singleRun: true,
-        frameworks: ['jasmine', 'karma-typescript'],
+        frameworks: ['jasmine'],
         files: [
-            '*.ts',
-            '**/*.png'
+            '*.spec.ts',
+            'test-images/*.png'
         ],
+        mime: { 'text/x-typescript': ['ts','tsx'] },
         preprocessors: {
-            "*.ts": "karma-typescript"
+            "*.spec.ts": ["webpack"]
         },
-        karmaTypescriptConfig: {
-            compilerOptions: {
-                sourceMap: true,
-                outDir: './dist',
-                lib: [
-                    "es2017", "dom"
+        webpack: {
+            mode: 'none',
+            resolve: {
+                extensions: ['.ts', '.js']
+            },
+            module: {
+                rules: [
+                    { test: /\.ts$/, loader: 'ts-loader'}
                 ]
             }
         },

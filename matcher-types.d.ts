@@ -1,3 +1,4 @@
+
 declare namespace jasmine {
     export interface Matchers<T> {
         /**
@@ -7,5 +8,9 @@ declare namespace jasmine {
          * @param expectationFailOutput 
          */
         toEqualImage(expected: ImageData, tolerance?: number, expectationFailOutput?: any): boolean;
+
+        toBeVector(expected: ex.Vector, delta?: number): boolean;
+
+        toHaveValues(expected: ex.IActorArgs): boolean;
     }
 }

@@ -1,4 +1,5 @@
 import { convertVisualToImageData } from "./convert";
+import * as ex from "excalibur";
 
 export declare type ExcaliburVisual = string | HTMLImageElement | HTMLCanvasElement | CanvasRenderingContext2D;
 
@@ -69,10 +70,50 @@ const ExcaliburMatchers: jasmine.CustomMatcherFactories = {
     toEqualImage: (util, customEqualityTester) => {
 
         return {
-            compare: (actual: ImageData, expected: ImageData, tolerance: number) => {
+            compare: (actual: ImageData, expected: ImageData, tolerance: number = .99) => {
                 return imageDiff(actual, expected, tolerance);
             }
         } 
+    },
+
+    toBeVector: (util, customEqualityTester) => {
+        return {
+            compare: (actual: ex.Vector, expected: ex.Vector, delta: number = .01) => {
+
+                let distance = actual.distance(expected);
+                if (distance <= delta) {
+                    return {
+                        pass: true,
+                        message: `Vector within delta ${distance} <= ${delta}`
+                    }
+                } else {
+                    return {
+                        pass: false,
+                        message: `Expected ex.Vector${actual.toString()} to be within ${delta} of ex.Vector${expected.toString()}, but was ${distance} distance apart`
+                    }
+                }
+            }
+        }
+    },
+    toHaveValues: (util, customEqualityTester) => {
+        return {
+            compare: (actual: ex.Actor, expected: ex.IActorArgs) => {
+
+                let message = 'Expected actor to have properties:\r\n\r\n';
+                let passed = true;
+                for (let key in expected) {
+                    if (actual[key] !== expected[key]) {
+                        passed = false;
+                        message += `Expected actor.${key} to be ${expected[key]}, but got ${actual[key]}\r\n`
+                    }
+                }
+
+                return {
+                    pass: passed,
+                    message: passed ? 'Actor properties match' : message
+                }
+            }
+        }
     }
 }
 

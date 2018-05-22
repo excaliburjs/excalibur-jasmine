@@ -6,7 +6,7 @@ describe('Custom matcher: toEqualImage', () => {
     });
 
     it('should exist', () => {
-        expect(ExcaliburMatchers).toBeDefined();
+        expect(ExcaliburMatchers.toEqualImage).toBeDefined();
     });
 
     it('can match equal dimensions images', (done) => {
