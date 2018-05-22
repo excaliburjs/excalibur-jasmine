@@ -6,7 +6,7 @@ module.exports = (config) => {
         frameworks: ['jasmine'],
         files: [
             '*.spec.ts',
-            'test-images/*.png'
+            { pattern: 'test-images/*.png', included: false, served: true }
         ],
         mime: { 'text/x-typescript': ['ts','tsx'] },
         preprocessors: {
