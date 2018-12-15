@@ -4,6 +4,10 @@
   "description": "Jasmine matchers for testing excalibur",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/excaliburjs/excalibur-jasmine/"
+  },
   "scripts": {
     "build": "webpack --mode none",
     "test": "node ./node_modules/karma/bin/karma start",
@@ -22,9 +26,9 @@
     "@types/webpack": "4.4.0",
     "@types/webpack-env": "1.13.6",
     "copy-webpack-plugin": "4.5.1",
-    "excalibur": "0.16.0",
+    "excalibur": "0.19.1",
     "jasmine-core": "3.1.0",
-    "karma": "2.0.2",
+    "karma": "3.1.3",
     "karma-chrome-launcher": "2.2.0",
     "karma-jasmine": "1.1.2",
     "karma-sourcemap-loader": "0.3.7",

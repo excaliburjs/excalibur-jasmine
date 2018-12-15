@@ -21,7 +21,7 @@ module.exports = {
         new CopyWebpackPlugin([
             './matcher-types.d.ts',
             './node_modules/excalibur/dist/excalibur.d.ts',
-            './node_modules/excalibur/dist/excalibur.amd.d.ts'
+            './node_modules/excalibur/dist/index.d.ts'
         ])
     ]
 }
