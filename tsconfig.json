@@ -12,6 +12,10 @@
             "@types/webpack",
             "@types/webpack-env",
             "@types/jasmine"
-        ]
-    }
+        ],
+    },
+    "exclude": [
+        "dist",
+        "node_modules"
+    ]
 }

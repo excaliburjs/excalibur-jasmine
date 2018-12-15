@@ -40,7 +40,7 @@ const imageDiff = (actual: ImageData, expected: ImageData, tolerance: number) =>
     if (percentDiff < tolerance) {
         return {
             pass: false,
-            message: `Expected image to match within ${tolerance*100}%, but only matched ${(percentDiff*100).toFixed(2)}%\r\n\r\n` +
+            message: `Expected image to match within ${tolerance*100}%, but only matched ${(percentDiff*100).toFixed(2)}%. ${diff} pixels different.\r\n\r\n` +
                      `Expected: ${toBase64Image(aData)}\r\n\r\n` + 
                      `To be: ${toBase64Image(eData)}\r\n\r\n` + 
                      `Diff: ${toBase64Image(diffData)}\r\n\r\n`
@@ -72,7 +72,7 @@ const ExcaliburMatchers: jasmine.CustomMatcherFactories = {
     toEqualImage: (util, customEqualityTester) => {
 
         return {
-            compare: (actual: ImageData, expected: ImageData, tolerance: number = .99) => {
+            compare: (actual: ImageData, expected: ImageData, tolerance: number = .995) => {
                 return imageDiff(actual, expected, tolerance);
             }
         } 
