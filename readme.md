@@ -13,7 +13,7 @@ These matchers are only supported in a browser context.
 In your jasmine test file
 
 ```typescript
-import { ExcaliburMatchers }
+import { ExcaliburMatchers } from 'excalibur-jasmine';
 import * as ex from 'excalibur';
 
 describe('A new thingy', () => {
