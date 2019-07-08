@@ -35,7 +35,7 @@
     "karma-webpack": "4.0.2",
     "puppeteer": "1.18.1",
     "ts-loader": "6.0.4",
-    "typescript": "3.5.2",
+    "typescript": "3.5.3",
     "webpack": "4.35.0",
     "webpack-cli": "3.3.5"
   },
