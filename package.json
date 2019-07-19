@@ -23,7 +23,7 @@
   "license": "BSD-2-Clause",
   "devDependencies": {
     "@types/jasmine": "3.3.14",
-    "@types/webpack": "4.4.34",
+    "@types/webpack": "4.32.0",
     "@types/webpack-env": "1.14.0",
     "copy-webpack-plugin": "5.0.3",
     "excalibur": "0.23.0",
@@ -36,7 +36,7 @@
     "puppeteer": "1.18.1",
     "ts-loader": "6.0.4",
     "typescript": "3.5.3",
-    "webpack": "4.35.3",
+    "webpack": "4.36.1",
     "webpack-cli": "3.3.6"
   },
   "dependencies": {}
