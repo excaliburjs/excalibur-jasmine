@@ -22,7 +22,7 @@
   "author": "Erik Onarheim",
   "license": "BSD-2-Clause",
   "devDependencies": {
-    "@types/jasmine": "3.4.2",
+    "@types/jasmine": "3.4.3",
     "@types/webpack": "4.39.3",
     "@types/webpack-env": "1.14.0",
     "copy-webpack-plugin": "5.0.4",
