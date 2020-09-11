@@ -99,7 +99,7 @@ const ExcaliburMatchers: jasmine.CustomMatcherFactories = {
     },
     toHaveValues: (util, customEqualityTester) => {
         return {
-            compare: (actual: ex.Actor, expected: ex.IActorArgs) => {
+            compare: (actual: ex.Actor, expected: ex.ActorArgs) => {
 
                 let message = 'Expected actor to have properties:\r\n\r\n';
                 let passed = true;
