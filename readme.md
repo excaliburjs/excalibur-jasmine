@@ -1,6 +1,6 @@
 # Excalibur Jasmine Matchers
 
-[![Build Status](https://travis-ci.org/excaliburjs/excalibur-jasmine.svg?branch=master)](https://travis-ci.org/excaliburjs/excalibur-jasmine)
+[![Build Status](https://travis-ci.org/excaliburjs/excalibur-jasmine.svg?branch=main)](https://travis-ci.org/excaliburjs/excalibur-jasmine)
 
 This library is built to help test excalibur, and games made with excalibur.
 
