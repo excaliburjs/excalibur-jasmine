@@ -23,7 +23,7 @@
   "license": "BSD-2-Clause",
   "devDependencies": {
     "@types/jasmine": "3.6.0",
-    "@types/webpack": "4.41.23",
+    "@types/webpack": "4.41.24",
     "@types/webpack-env": "1.15.3",
     "copy-webpack-plugin": "6.2.1",
     "excalibur": "0.24.5",
