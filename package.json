@@ -24,7 +24,7 @@
   "devDependencies": {
     "@types/jasmine": "3.6.2",
     "@types/webpack": "4.41.25",
-    "@types/webpack-env": "1.15.3",
+    "@types/webpack-env": "1.16.0",
     "copy-webpack-plugin": "6.3.2",
     "excalibur": "0.24.5",
     "jasmine-core": "3.6.0",
