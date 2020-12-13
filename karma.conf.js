@@ -13,7 +13,7 @@ module.exports = (config) => {
             "specs/index.ts": ["webpack", 'sourcemap']
         },
         webpack: {
-            devtool: 'inline-source-map',
+            devtool: 'source-map',
             resolve: {
                 extensions: ['.ts', '.js']
             },

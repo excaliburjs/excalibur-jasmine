@@ -18,10 +18,12 @@ module.exports = {
         ]
     },
     plugins: [
-        new CopyWebpackPlugin([
-            './matcher-types.d.ts',
-            './node_modules/excalibur/dist/excalibur.d.ts',
-            './node_modules/excalibur/dist/index.d.ts'
-        ])
+        new CopyWebpackPlugin({
+            patterns: [
+                './matcher-types.d.ts',
+                './node_modules/excalibur/dist/excalibur.d.ts',
+                './node_modules/excalibur/dist/index.d.ts'
+            ]
+        })
     ]
 }

@@ -1,7 +1,7 @@
 /// <reference path="matcher-types.d.ts" />
 
-import { convertVisualToImageData } from "./convert";
-import * as ex from "excalibur";
+import { convertSourceVisualToImageData, ImageVisual } from "./convert";
+import { Actor, ActorArgs, Vector } from 'excalibur';
 
 export declare type ExcaliburVisual = string | HTMLImageElement | HTMLCanvasElement | CanvasRenderingContext2D;
 
@@ -64,7 +64,23 @@ const toBase64Image = (imageData: ImageData) => {
 
 
 const ensureImagesLoaded = (...images: ExcaliburVisual[]): Promise<ImageData[]> => {
-    return Promise.all(images.map(convertVisualToImageData));
+    let results: Promise<ImageData>[] = [];
+    for (let image of images) {
+        results.push(convertSourceVisualToImageData(image));
+    }
+    return Promise.all(results);
+}
+
+const ExcaliburAsyncMatchers: jasmine.CustomAsyncMatcherFactories = {
+
+    toEqualImage: (util, customEqualityTester) => {
+
+        return {
+            compare: async (actual: ImageVisual, expected: ImageVisual, tolerance: number = .995) => {
+                return imageDiff(await convertSourceVisualToImageData(actual), await convertSourceVisualToImageData(expected), tolerance);
+            },
+        } 
+    }
 }
 
 const ExcaliburMatchers: jasmine.CustomMatcherFactories = {
@@ -80,7 +96,7 @@ const ExcaliburMatchers: jasmine.CustomMatcherFactories = {
 
     toBeVector: (util, customEqualityTester) => {
         return {
-            compare: (actual: ex.Vector, expected: ex.Vector, delta: number = .01) => {
+            compare: (actual: Vector, expected: Vector, delta: number = .01) => {
 
                 let distance = actual.distance(expected);
                 if (distance <= delta) {
@@ -99,7 +115,7 @@ const ExcaliburMatchers: jasmine.CustomMatcherFactories = {
     },
     toHaveValues: (util, customEqualityTester) => {
         return {
-            compare: (actual: ex.Actor, expected: ex.ActorArgs) => {
+            compare: (actual: Actor, expected: ActorArgs) => {
 
                 let message = 'Expected actor to have properties:\r\n\r\n';
                 let passed = true;
@@ -119,4 +135,4 @@ const ExcaliburMatchers: jasmine.CustomMatcherFactories = {
     }
 }
 
-export { ExcaliburMatchers, ensureImagesLoaded };
+export { ExcaliburAsyncMatchers, ExcaliburMatchers, ensureImagesLoaded, convertSourceVisualToImageData as asImageData };

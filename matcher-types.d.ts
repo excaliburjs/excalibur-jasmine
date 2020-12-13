@@ -1,5 +1,10 @@
+type ImageVisual = HTMLCanvasElement | CanvasRenderingContext2D | HTMLImageElement | string;
 
 declare namespace jasmine {
+    export interface AsyncMatchers<T, U> {
+        toEqualImage(expected: ImageVisual, tolerance?: number, expectationFailOutput?: any): PromiseLike<void>;
+    }
+
     export interface Matchers<T> {
         /**
          * Compares ImageData to see what percentage of the pixels match
@@ -20,6 +25,6 @@ declare namespace jasmine {
          * Compares an Excalibur actor to a set of possible properties on actor
          * @param expected The expected properties on an actor
          */
-        toHaveValues(expected: ex.IActorArgs): boolean;
+        toHaveValues(expected: ex.ActorArgs): boolean;
     }
 }
