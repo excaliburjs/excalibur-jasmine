@@ -1,7 +1,7 @@
 /// <reference path="matcher-types.d.ts" />
 
 import { convertSourceVisualToImageData, ImageVisual } from "./convert";
-import { Actor, ActorArgs, Vector } from 'excalibur';
+import type * as ex from 'excalibur';
 
 export declare type ExcaliburVisual = string | HTMLImageElement | HTMLCanvasElement | CanvasRenderingContext2D;
 
@@ -96,7 +96,7 @@ const ExcaliburMatchers: jasmine.CustomMatcherFactories = {
 
     toBeVector: (util, customEqualityTester) => {
         return {
-            compare: (actual: Vector, expected: Vector, delta: number = .01) => {
+            compare: (actual: ex.Vector, expected: ex.Vector, delta: number = .01) => {
 
                 let distance = actual.distance(expected);
                 if (distance <= delta) {
@@ -115,7 +115,7 @@ const ExcaliburMatchers: jasmine.CustomMatcherFactories = {
     },
     toHaveValues: (util, customEqualityTester) => {
         return {
-            compare: (actual: Actor, expected: ActorArgs) => {
+            compare: (actual: ex.Actor, expected: ex.ActorArgs) => {
 
                 let message = 'Expected actor to have properties:\r\n\r\n';
                 let passed = true;
