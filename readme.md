@@ -13,16 +13,42 @@ These matchers are only supported in a browser context.
 In your jasmine test file
 
 ```typescript
-import { ExcaliburMatchers } from 'excalibur-jasmine';
+import { ExcaliburMatchers, ExcaliburAsyncMatchers } from 'excalibur-jasmine';
 import * as ex from 'excalibur';
 
 describe('A new thingy', () => {
     beforeAll(() => {
-        jasmine.addMatchers(ExcaliburMatchers)
+        jasmine.addMatchers(ExcaliburMatchers);
+        jasmine.addAsyncMatchers(ExcaliburAsyncMatchers);
     });
     
     it('should be fast', () => {
       ...
+    });
+    
+});
+
+```
+
+## Async Matchers
+
+
+### New and improved toEqualImage
+
+Now with jasmine async matchers you can remove a lot of the old boilerplate need to match images!
+
+```typescript
+
+import { ExcaliburAsyncMatchers } from 'excalibur-jasmine'
+
+describe('A new thingy', () => {
+    beforeAll(() => {
+        jasmine.addAsyncMatchers(ExcaliburAsyncMatchers);
+    });
+    
+    it('should match images', async () => {
+      let engine = new ex.Engine({width: 100, height: 100});
+      await expectAsync(engine.canvas).toEqualImage('images/expectedcanvas.png', .99);
     });
     
 });
@@ -36,12 +62,13 @@ describe('A new thingy', () => {
 For loading images, there is a helper called `ensureImagesLoaded` that will ensure that any image resources are loaded into the test before comparing them.
 
 ```typescript
-import { ExcaliburMatchers, ensureImagesLoaded }
+import { ExcaliburMatchers, ExcaliburAsyncMatchers, ensureImagesLoaded } from 'excalibur-jasmine'
 import * as ex from 'excalibur';
 
 describe('A new thingy', () => {
     beforeAll(() => {
-        jasmine.addMatchers(ExcaliburMatchers)
+        jasmine.addMatchers(ExcaliburMatchers);
+        jasmine.addAsyncMatchers(ExcaliburAsyncMatchers);
     });
     
     it('should match images', (done) => {
