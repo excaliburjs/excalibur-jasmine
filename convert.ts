@@ -19,7 +19,7 @@ const convertCanvas = (canvas: HTMLCanvasElement): ImageData => {
     return data;
 }
 
-const convertFilePath = async (imagePath: string, baseImagePath: string = '/base/'): Promise<ImageData>  => {
+const convertFilePath = async (imagePath: string, baseImagePath: string = ''): Promise<ImageData>  => {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
 

@@ -4,6 +4,11 @@ module.exports = (config) => {
     config.set({
         singleRun: true,
         frameworks: ['jasmine'],
+        proxies: {
+            // smooths over loading files because karma prepends '/base/' to everything
+            '/src/' : '/base/src/',
+            '/test-images/': '/base/test-images/'
+        },
         files: [
             'specs/index.ts',
             { pattern: 'test-images/*.png', included: false, served: true }
