@@ -30,6 +30,16 @@ describe('A new thingy', () => {
 
 ```
 
+Using image matchers with karma, you will want to add a proxy to smooth over `/base/` this repo is a good example of how to configure it.
+
+```js
+proxies: {
+  // smooths over loading files because karma prepends '/base/' to everything
+  '/src/' : '/base/src/',
+  '/test-images/': '/base/test-images/'
+},
+```
+
 ## Async Matchers
 
 
