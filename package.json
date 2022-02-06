@@ -25,7 +25,7 @@
     "@types/jasmine": "3.10.3",
     "@types/webpack": "4.41.32",
     "@types/webpack-env": "1.16.3",
-    "copy-webpack-plugin": "9.1.0",
+    "copy-webpack-plugin": "10.2.4",
     "excalibur": "0.25.3",
     "jasmine-core": "3.99.0",
     "karma": "6.3.15",
