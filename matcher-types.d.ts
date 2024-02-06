@@ -1,11 +1,11 @@
 type ImageVisual = HTMLCanvasElement | CanvasRenderingContext2D | HTMLImageElement | string;
 
 declare namespace jasmine {
-    export interface AsyncMatchers<T, U> {
+    interface AsyncMatchers<T, U> {
         toEqualImage(expected: ImageVisual, tolerance?: number, expectationFailOutput?: any): PromiseLike<void>;
     }
 
-    export interface Matchers<T> {
+    interface Matchers<T> {
         /**
          * Compares ImageData to see what percentage of the pixels match
          * @param expected ImageData that is expected

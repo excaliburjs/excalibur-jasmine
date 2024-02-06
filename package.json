@@ -1,6 +1,6 @@
 {
   "name": "excalibur-jasmine",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Jasmine matchers for testing excalibur",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -22,23 +22,28 @@
   "author": "Erik Onarheim",
   "license": "BSD-2-Clause",
   "devDependencies": {
-    "@types/jasmine": "3.10.6",
-    "@types/webpack": "4.41.32",
-    "@types/webpack-env": "1.16.3",
-    "copy-webpack-plugin": "9.1.0",
-    "excalibur": "0.25.3",
-    "jasmine-core": "3.99.1",
-    "karma": "6.3.18",
-    "karma-chrome-launcher": "3.1.1",
-    "karma-jasmine": "4.0.2",
-    "karma-sourcemap-loader": "0.3.8",
-    "karma-webpack": "5.0.0",
+    "@types/jasmine": "5.1.4",
+    "@types/webpack": "5.28.5",
+    "@types/webpack-env": "1.18.4",
+    "copy-webpack-plugin": "12.0.2",
+    "excalibur": "0.28.7",
+    "jasmine-core": "5.1.1",
+    "karma": "6.4.2",
+    "karma-chrome-launcher": "3.2.0",
+    "karma-jasmine": "5.1.0",
+    "karma-sourcemap-loader": "0.4.0",
+    "karma-webpack": "5.0.1",
+    "puppeteer": "10.4.0",
+    "ts-loader": "9.5.1",
+    "typescript": "5.3.3",
     "wallaby-webpack": "3.9.16",
-    "puppeteer": "13.5.2",
-    "ts-loader": "9.2.8",
-    "typescript": "4.6.3",
-    "webpack": "5.50.0",
-    "webpack-cli": "4.9.2"
+    "webpack": "5.90.1",
+    "webpack-cli": "5.1.4"
   },
-  "dependencies": {}
+  "peerDependencies": {
+    "excalibur": "0.28.7"
+  },
+  "dependencies": {
+    "pixelmatch": "5.3.0"
+  }
 }

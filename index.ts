@@ -1,6 +1,8 @@
 /// <reference path="matcher-types.d.ts" />
 
 import { convertSourceVisualToImageData, ImageVisual } from "./convert";
+import * as pixelmatch from 'pixelmatch';
+import { type PixelmatchOptions } from 'pixelmatch';
 import type * as ex from 'excalibur';
 
 export declare type ExcaliburVisual = string | HTMLImageElement | HTMLCanvasElement | CanvasRenderingContext2D;
@@ -71,21 +73,106 @@ const ensureImagesLoaded = (...images: ExcaliburVisual[]): Promise<ImageData[]> 
     return Promise.all(results);
 }
 
+
+const img1Canvas = document.createElement('canvas');
+const img1Context = img1Canvas.getContext('2d')!;
+
+const img2Canvas = document.createElement('canvas');
+const img2Context = img2Canvas.getContext('2d')!;
+
+const diffCanvas = document.createElement('canvas');
+const diffContext = diffCanvas.getContext('2d')!;
+
+export type Visual = string | HTMLImageElement | HTMLCanvasElement | CanvasRenderingContext2D;
+export type DiffOptions = PixelmatchOptions;
+
+const flushSourceToImageData = async (source: Visual, context: CanvasRenderingContext2D) => {
+  if (source instanceof HTMLImageElement) {
+    context.canvas.width = source.naturalWidth;
+    context.canvas.height = source.naturalHeight;
+    context.imageSmoothingEnabled = false;
+    context.drawImage(source, 0, 0);
+  } else if (source instanceof HTMLCanvasElement) {
+    context.canvas.width = source.width;
+    context.canvas.height = source.height;
+    context.imageSmoothingEnabled = false;
+    context.drawImage(source, 0, 0);
+  } else if (source instanceof CanvasRenderingContext2D) {
+    const imageData = source.getImageData(0, 0, source.canvas.width, source.canvas.height);
+    context.canvas.width = source.canvas.width;
+    context.canvas.height = source.canvas.height;
+    context.imageSmoothingEnabled = false;
+  } else if (typeof source === 'string') {
+    // load image
+    const img = new Image();
+    const baseImagePath = '';
+    img.decoding = 'sync';
+    if (source) {
+        img.src = baseImagePath + source + '?_=' + Math.random();
+        try {
+            await img.decode();
+        } catch {
+            console.warn(`Image could not be decoded, check image src: ${img.src}`)
+        }
+    }
+
+    context.canvas.width = img.width;
+    context.canvas.height = img.height;
+    context.imageSmoothingEnabled = false;
+
+    context.drawImage(img, 0, 0);
+  }
+  return context.getImageData(0, 0, context.canvas.width, context.canvas.height);
+}
+
 const ExcaliburAsyncMatchers: jasmine.CustomAsyncMatcherFactories = {
 
-    toEqualImage: (util, customEqualityTester) => {
+    toEqualImage: (util: jasmine.MatchersUtil) => {
 
         return {
-            compare: async (actual: ImageVisual, expected: ImageVisual, tolerance: number = .995) => {
-                return imageDiff(await convertSourceVisualToImageData(actual), await convertSourceVisualToImageData(expected), tolerance);
-            },
-        } 
-    }
+          compare: async (actual: Visual, expected: Visual, tolerance: number = .995) => {
+            const actualData = await flushSourceToImageData(actual, img1Context);
+            const expectedData = await flushSourceToImageData(expected, img2Context);
+
+            if (actualData.width !== expectedData.width ||
+                actualData.height !== expectedData.height) {
+                return {
+                    pass: false,
+                    message: `Expected image dimension to be (${expectedData.width}x${expectedData.height}), but got (${actualData.width}x${actualData.height})`
+                }
+            }
+    
+            const { width, height } = expectedData;
+            diffContext.canvas.width = width;
+            diffContext.canvas.height = height;
+            const diffData = diffContext.createImageData(width, height);
+    
+            let length = actualData.data.length;
+            let totalPixels = length / 4;
+            const pixelsDiff = pixelmatch(actualData.data, expectedData.data, diffData.data, width, height);
+            let percentDiff = ((totalPixels - pixelsDiff)/ totalPixels);
+    
+            diffContext.putImageData(diffData, 0, 0)
+    
+            const actualBase64 = img1Context.canvas.toDataURL('image/png', 0);
+            const expectedBase64 = img2Context.canvas.toDataURL('image/png', 0);
+            const diffBase64 = diffContext.canvas.toDataURL('image/png', 0);
+            return {
+              pass: percentDiff > (1 - tolerance),
+              message:
+                `Expected image to match within ${tolerance*100}%, but only matched ${(percentDiff*100).toFixed(2)}%. ${pixelsDiff} pixels different.\r\n\r\n`  +
+                `Expected: ${actualBase64}\r\n\r\n` +
+                `To be: ${expectedBase64}\r\n\r\n` + 
+                `Diff: ${diffBase64}\r\n\r\n`
+            }
+          }
+        }
+      }
 }
 
 const ExcaliburMatchers: jasmine.CustomMatcherFactories = {
 
-    toEqualImage: (util, customEqualityTester) => {
+    toEqualImage: ()=> {
 
         return {
             compare: (actual: ImageData, expected: ImageData, tolerance: number = .995) => {
@@ -94,7 +181,7 @@ const ExcaliburMatchers: jasmine.CustomMatcherFactories = {
         } 
     },
 
-    toBeVector: (util, customEqualityTester) => {
+    toBeVector: () => {
         return {
             compare: (actual: ex.Vector, expected: ex.Vector, delta: number = .01) => {
 
@@ -113,7 +200,7 @@ const ExcaliburMatchers: jasmine.CustomMatcherFactories = {
             }
         }
     },
-    toHaveValues: (util, customEqualityTester) => {
+    toHaveValues: () => {
         return {
             compare: (actual: ex.Actor, expected: ex.ActorArgs) => {
 
