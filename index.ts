@@ -53,6 +53,7 @@ const flushSourceToImageData = async (source: Visual, context: CanvasRenderingCo
         context.canvas.width = source.canvas.width;
         context.canvas.height = source.canvas.height;
         context.imageSmoothingEnabled = false;
+        context.putImageData(imageData, 0, 0);
     } else if (typeof source === 'string') {
         // load image
         const img = new Image();
