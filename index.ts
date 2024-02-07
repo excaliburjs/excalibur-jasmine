@@ -57,11 +57,15 @@ const flushSourceToImageData = async (source: Visual, context: CanvasRenderingCo
     } else if (typeof source === 'string') {
         // load image
         const img = new Image();
+        const loaded = new Promise<void>((resolve, _) => {
+            img.onload = () => resolve();
+        });
         const baseImagePath = '';
         img.decoding = 'sync';
         if (source) {
             img.src = baseImagePath + source + '?_=' + Math.random();
             try {
+                await loaded;
                 await img.decode();
             } catch {
                 console.warn(`Image could not be decoded, check image src: ${img.src}`)
