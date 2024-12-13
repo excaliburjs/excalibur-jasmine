@@ -1,3 +1,5 @@
+/// <reference path="matcher-types.d.ts" />
+/// <reference types="@types/jasmine" />
 import { convertSourceVisualToImageData } from "./convert";
 import { type PixelmatchOptions } from 'pixelmatch';
 export declare type ExcaliburVisual = string | HTMLImageElement | HTMLCanvasElement | CanvasRenderingContext2D;
