@@ -43,6 +43,6 @@
     "excalibur": "~0.30.0 || ~0.31.0 || ~0.32.0"
   },
   "dependencies": {
-    "pixelmatch": "5.3.0"
+    "pixelmatch": "7.1.0"
   }
 }
